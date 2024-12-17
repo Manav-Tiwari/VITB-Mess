@@ -329,16 +329,36 @@
                 currentDateElement.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             }
 
+            // Function to display current menu
             function displayCurrentMenu(selectedMess) {
+                const now = new Date(); // Get current time
+                const timeNow = now.getHours() * 100 + now.getMinutes(); // Time in HHMM format
+
                 const menuToday = messMenus[selectedMess]?.dishes[today] || [];
                 const servingNow = timeNow > 730 && timeNow < 915 ? menuToday[0] :
                     timeNow > 1230 && timeNow < 1530 ? menuToday[1] :
                         timeNow > 1700 && timeNow < 1815 ? menuToday[2] :
-                            timeNow > 1930 && timeNow < 2100 ? menuToday[3] :
-                                `<b>Air</b> <br> <i>[mess is currently closed]</i>`;
+                            timeNow > 1959 && timeNow < 2100 ? menuToday[3] :
+                                `AIR <br> [Mess is currently closed]`;
 
-                currentMenu.innerHTML = servingNow; // Render as HTML
+                currentMenu.innerHTML = servingNow; // Render the current menu
             }
+
+            // Function to get the selected mess from the dropdown
+            function getSelectedMess() {
+                const messSelect = document.getElementById("mess-select");
+                return messSelect.value;
+            }
+
+            // Automatically update the menu every 30 seconds
+            setInterval(() => {
+                const selectedMess = getSelectedMess(); // Get the selected mess dynamically
+                displayCurrentMenu(selectedMess);
+            }, 30000); // Refresh every 30 seconds
+
+            // Initial setup to load the current menu
+            const selectedMess = getSelectedMess();
+            displayCurrentMenu(selectedMess);
 
 
             function generateWeeklyMenu(messName, dailyMenus) {
