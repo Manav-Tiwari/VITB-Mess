@@ -58,7 +58,7 @@
         <div class="mb-6">
             <h2 class="text-xl lg:text-2xl font-bold text-teal-400">Currently Serving</h2>
             <div id="current-menu" class="mt-4 text-lg font-semibold text-gray-200">
-                AIR<br>[mess is closed]
+                Loading...
             </div>
         </div>
 
@@ -290,9 +290,10 @@
             function displayCurrentMenu(selectedMess) {
                 const menuToday = messMenus[selectedMess]?.dishes[today] || [];
                 const servingNow = timeNow > 730 && timeNow < 915 ? menuToday[0] :
-                    timeNow > 1230 && timeNow < 1415 ? menuToday[1] :
+                    timeNow > 1230 && timeNow < 1530 ? menuToday[1] :
                         timeNow > 1700 && timeNow < 1815 ? menuToday[2] :
                             timeNow > 1930 && timeNow < 2100 ? menuToday[3] :
+                                'Air [Mess is currently closed]';
                 currentMenu.textContent = servingNow;
             }
 
