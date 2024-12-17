@@ -286,7 +286,7 @@
                     ]
                     ),
                     dishes: [
-                    ["MASALA DOSA, SAMBHAR CHUTNEY, BANANA or FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
+                        ["MASALA DOSA, SAMBHAR CHUTNEY, BANANA or FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
                             "ONION CUCUMBER RAITA, CHICKEN BIRYANI, MIX DAL, VEG BIRYANI, CHAPATHI, MUTTER PANEER, PICKLE",
                             "BHEL PURI, SAUCE CHUTNEY, TEA COFFEE MILK",
                             "VEG KOLHAPURI, DAL MAKHANI, CHAPATHI, RICE, RASAM, GULAB JAMUN"],
@@ -335,9 +335,11 @@
                     timeNow > 1230 && timeNow < 1530 ? menuToday[1] :
                         timeNow > 1700 && timeNow < 1815 ? menuToday[2] :
                             timeNow > 1930 && timeNow < 2100 ? menuToday[3] :
-                                'Air [Mess is currently closed]';
-                currentMenu.textContent = servingNow;
+                                `<b>Air</b> <br> <i>[mess is currently closed]</i>`;
+
+                currentMenu.innerHTML = servingNow; // Render as HTML
             }
+
 
             function generateWeeklyMenu(messName, dailyMenus) {
                 return `<table class='w-full border-collapse text-gray-300'>
