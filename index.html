@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIT Hostel Mess Schedule</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(130deg, #1e293b, #0f172a);
+            color: #f3f4f6;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .highlight {
+            background-color: #1e40af;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center min-h-screen">
+    <div class="w-full max-w-5xl mx-auto text-center bg-gray-800 rounded-lg shadow-xl p-6">
+        <h1 class="text-3xl lg:text-5xl font-bold mb-4 text-teal-400">VIT-B Hostel Mess Schedule</h1>
+        <p class="text-gray-400 text-sm lg:text-lg mb-6" id="mess-label">Select Your Mess</p>
+
+        <!-- Dropdown to Select Mess -->
+        <div class="mb-6">
+            <select id="mess-select"
+                class="w-1/2 p-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none">
+                <option value="mayuri_boys">Mayuri Mess (Boys Block 2-5)</option>
+                <option value="safal_boys">Safal Mess (Boys Block 6)</option>
+                <option value="crcl_boys">CRCL Mess (Boys Block 1)</option>
+            </select>
+        </div>
+
+        <!-- Current Date & Time -->
+        <div class="bg-gray-900 p-4 rounded-lg shadow-lg mb-6">
+            <p class="text-lg lg:text-xl font-semibold">Time: <span id="current-time"
+                    class="text-teal-300">Loading...</span></p>
+            <p class="text-lg lg:text-xl font-semibold">Date: <span id="current-date"
+                    class="text-teal-300">Loading...</span></p>
+        </div>
+
+        <!-- Today's Dish -->
+        <div class="mb-6">
+            <h2 class="text-xl lg:text-2xl font-bold text-teal-400">Currently Serving</h2>
+            <div id="current-menu" class="mt-4 text-lg font-semibold text-gray-200">
+                Loading...
+            </div>
+        </div>
+
+        <!-- Full Time Table Button -->
+        <div>
+            <button id="full-menu-btn"
+                class="bg-teal-600 hover:bg-teal-500 text-white font-semibold px-4 py-2 rounded-lg">View Full Time
+                Table</button>
+        </div>
+
+        <!-- Full Menu Popup -->
+        <div id="full-menu-popup" class="fixed inset-0 bg-black bg-opacity-70 hidden flex justify-center items-center">
+            <div class="bg-gray-800 p-8 rounded-lg w-11/12 max-w-6xl overflow-auto max-h-[90vh]">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-teal-400">Full Mess Timetable</h2>
+                    <button id="close-popup" class="text-red-500 hover:text-red-400 text-2xl font-bold">&times;</button>
+                </div>
+                <div id="full-menu-content">
+                    <!-- Full Table Generated Dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-8">
+            <p class="text-xs text-gray-500">Made with ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const currentTimeElement = document.getElementById("current-time");
+            const currentDateElement = document.getElementById("current-date");
+            const currentMenu = document.getElementById("current-menu");
+            const messSelectElement = document.getElementById("mess-select");
+            const fullMenuButton = document.getElementById("full-menu-btn");
+            const popup = document.getElementById("full-menu-popup");
+            const popupContent = document.getElementById("full-menu-content");
+            const closePopup = document.getElementById("close-popup");
+
+            const now = new Date();
+            const today = now.getDay();
+            const timeNow = now.getHours() * 100 + now.getMinutes();
+
+            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const messMenus = {
+                mayuri_boys: {
+                    fullTable: generateWeeklyMenu("Mayuri Mess", [
+                        ["IDLY, VADA, SAMBAR, COCONUT CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, PLAIN DAL, PLAIN CHOWMEIN, SEASONAL VEGETABLE/BLACK CHANA, WHITE RICE, KARA KOLMBU, SAMBAR, RASAM, FRUITS, PLAIN BUTTER MILK", "ROTI, ALOO BHINDI DRY, JEERA ALOO, VEGETABLE CURRY, RICE, PANEER CURRY, KADHI PAKORA, PICKLE"],
+                        ["POORI/BHAJI, MASALA PARATHA, CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, JEERA ALOO, GHEE RICE, DAL TADKA, WHITE RICE, SAMBAR, RASAM, SALAD", "ROTI, ALOO BHINDI DRY, KASHI HALWA, PANEER MASALA, PICKLE"],
+                        ["ONION/TOMATO UTTAPAM, SAMBAR, TOMATO CHUTNEY, FRUITS, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, ALOO PEAS, CHOLA CURRY, PULAO RICE, GARLIC DAL, BOONDI RAITA", "ROTI, ALOO DRY, RICE KITCHADI, KADHI PAKORA, RASAM & PICKLE"],
+                        ["POHA, JALEBI, SAMBAR, CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, VEG PULAO, BESAN SABJI, DAL MAKHANI, SEASONAL VEGETABLE, BOONDI RAITA", "ROTI, MIX VEGETABLE, SAMBAR, PANEER CURRY, PICKLE"],
+                        ["BREAD BUTTER JAM, BOILED EGG, FRUIT, MILK, TEA, COFFEE", "ROTI, VEG CURRY, BRINJAL MASALA, CURD RICE, JEERA ALOO, VEG FRIED RICE", "ROTI, PANEER MASALA, VEGETABLE CHOWMEIN, KADHI PAKORA, PICKLE"],
+                        ["RAVA UPMA, CHUTNEY, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, ALOO MASALA, SAMBAR, WHITE RICE, VEGETABLE KOOTU, PICKLE", "ROTI, VEG MANCHURIAN GRAVY, MIXED VEG DRY, KADHI PAKORA, FRUITS"],
+                        ["BREAD BUTTER JAM, PARATHA, MILK, TEA, COFFEE", "ROTI, GOBI MASALA, RICE, DAHI BHAT, FRUITS, SAMBAR", "CHAPATI, ALOO VEG, KADHI PAKORA, DAL FRY, PICKLE"]
+                    ]
+                    ),
+                    dishes: [
+                        ["IDLY, VADA, SAMBAR, COCONUT CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, PLAIN DAL, PLAIN CHOWMEIN, SEASONAL VEGETABLE/BLACK CHANA, WHITE RICE, KARA KOLMBU, SAMBAR, RASAM, FRUITS, PLAIN BUTTER MILK", "ROTI, ALOO BHINDI DRY, JEERA ALOO, VEGETABLE CURRY, RICE, PANEER CURRY, KADHI PAKORA, PICKLE"],
+                        ["POORI/BHAJI, MASALA PARATHA, CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, JEERA ALOO, GHEE RICE, DAL TADKA, WHITE RICE, SAMBAR, RASAM, SALAD", "ROTI, ALOO BHINDI DRY, KASHI HALWA, PANEER MASALA, PICKLE"],
+                        ["ONION/TOMATO UTTAPAM, SAMBAR, TOMATO CHUTNEY, FRUITS, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, ALOO PEAS, CHOLA CURRY, PULAO RICE, GARLIC DAL, BOONDI RAITA", "ROTI, ALOO DRY, RICE KITCHADI, KADHI PAKORA, RASAM & PICKLE"],
+                        ["POHA, JALEBI, SAMBAR, CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, VEG PULAO, BESAN SABJI, DAL MAKHANI, SEASONAL VEGETABLE, BOONDI RAITA", "ROTI, MIX VEGETABLE, SAMBAR, PANEER CURRY, PICKLE"],
+                        ["BREAD BUTTER JAM, BOILED EGG, FRUIT, MILK, TEA, COFFEE", "ROTI, VEG CURRY, BRINJAL MASALA, CURD RICE, JEERA ALOO, VEG FRIED RICE", "ROTI, PANEER MASALA, VEGETABLE CHOWMEIN, KADHI PAKORA, PICKLE"],
+                        ["RAVA UPMA, CHUTNEY, BREAD BUTTER JAM, MILK, TEA, COFFEE", "ROTI, ALOO MASALA, SAMBAR, WHITE RICE, VEGETABLE KOOTU, PICKLE", "ROTI, VEG MANCHURIAN GRAVY, MIXED VEG DRY, KADHI PAKORA, FRUITS"],
+                        ["BREAD BUTTER JAM, PARATHA, MILK, TEA, COFFEE", "ROTI, GOBI MASALA, RICE, DAHI BHAT, FRUITS, SAMBAR", "CHAPATI, ALOO VEG, KADHI PAKORA, DAL FRY, PICKLE"]
+                    ]
+
+                },
+                crcl_boys: {
+                    fullTable: generateWeeklyMenu("CRCL Mess", [
+                        ["IDLY, VADA, SAMBAR, COCONUT CHUTNEY, BANANA / FRUIT SALAD, BREAD, BUTTER JAM, MILK, TEA, COFFEE",
+                            "SPROUTS SALAD, ROTI, KADHI PAKORA, JEERA ALOO, RICE, MOREKUZHAMBU, POTATO PORIYAL, RASAM, PICKLE",
+                            "KACHORI, MINT CHUTNEY, TEA / COFFEE / MILK",
+                            "ROTI, ALOO MUTTER MASALA, EGG CURRY, GUJARATI DAL, RICE, PICKLE, RASAM, SWEET CORN SOUP, JAIN CABBAGE SABJI"],
+
+                        ["POORI, ALOO MASALA, BANANA / FRUIT SALAD, BREAD, BUTTER JAM, MILK, TEA, COFFEE",
+                            "ROTI, KALA CHANNA SABJI, GARLIC DHALL, PLAIN RICE, ANDRA PAPPU, BRINJAL PULI KOOTU, RASAM, PICKLE",
+                            "ALOO PAPDI CHATCHANNI, SUNDAL, TEA / COFFEE / MILK",
+                            "ROTI, VEG MAKHANWALA, RAJASTHANI DAL, BASANTI PULAO, RICE, RASAM"],
+
+                        ["VERMICELLI KITCHADI, CHUTNEY, BUTTER, JAM, MILK, TEA, COFFEE",
+                            "SALAD, ROTI, GREEN LEAVES SABJI, RICE, SAMBAR, BEETROOT PORIYAL, RASAM, PICKLE",
+                            "SAMBAR VADA, COFFEE / MILK",
+                            "ROTI, RICE, DAL, PLAIN DAL, RASAM, PANEER LABADAR, RASAM RICE"],
+
+                        ["UTHAPPAM, SAMBAR, GREEN CHUTNEY, EGG, SPROUTS, BANANA / FRUIT SALAD, BUTTER JAM, MILK, TEA, COFFEE",
+                            "ROTI, ALOO PALAK, VEG PULAO, PLAIN RICE, KARA KUZHAMBU, GREENS KOOTU, RASAM, PAYASAM / SWEET BONDI",
+                            "SAMOSA, TAMRIND CHUTNEY, TEA",
+                            "ROTI, BEHAN BARTHA, ACHARI CHICKEN / BUTTER CHICKEN, PUNJABI DAL, RICE, SAMBAR"],
+
+                        ["BHATURA, CHOLE MASALA, BREAD, BUTTER, JAM, MILK, TEA, COFFEE",
+                            "ROTI, TOMATO DAL, PLAIN RICE, GREEN KOOTU, RASAM, PICKLE",
+                            "PAV, COCONUT CHUTNEY, TEA / COFFEE / MILK",
+                            "ROTI, DAL TADKA, CHETTINADU CHICKEN / CHICKEN MASALA, SHAI PANEER, RICE, PICKLE"],
+
+                        ["POHA, PONGAL, JALEBI, BANANA / FRUIT SALAD, BUTTER, MILK, TEA, COFFEE",
+                            "ROTI, BOONDI RAITHA, VEG BIRYANI, ALOO GOBI PARATHA, SAMBAR RICE, RAW BANANA PORIYAL, JAIN",
+                            "MYSOUR BONDA, GREEN CHUTNEY, TEA / COFFEE / MILK",
+                            "ROTI, FRY, DAL FRY, RASAM, GULAB JAMUN, RICE"],
+
+                        ["MASALA DOSA, SAMBAR, CHUTNEY, BANANA / FRUIT SALAD, BREAD, BUTTER, MILK, TEA, COFFEE",
+                            "CUCUMBER RAITHA, CHICKEN BIRYANI, MIX VEG SABJI, PANEER MUTTER MASALA, JAIN DAL",
+                            "DHOKALA, GREEN CHUTNEY, TEA / COFFEE / MILK",
+                            "CHAPATHI, BANGALI ALOO, DAL FRY, DAL-MAKHANI, RASAM"]
+                    ]),
+                    dishes: [
+                        ["IDLY, VADA, SAMBAR, COCONUT CHUTNEY, BANANA / FRUIT SALAD, BREAD, BUTTER JAM, MILK, TEA, COFFEE",
+                            "SPROUTS SALAD, ROTI, KADHI PAKORA, JEERA ALOO, RICE, MOREKUZHAMBU, POTATO PORIYAL, RASAM, PICKLE",
+                            "KACHORI, MINT CHUTNEY, TEA / COFFEE / MILK",
+                            "ROTI, ALOO MUTTER MASALA, EGG CURRY, GUJARATI DAL, RICE, PICKLE, RASAM, SWEET CORN SOUP, JAIN CABBAGE SABJI"],
+
+                        ["POORI, ALOO MASALA, BANANA / FRUIT SALAD, BREAD, BUTTER JAM, MILK, TEA, COFFEE",
+                            "ROTI, KALA CHANNA SABJI, GARLIC DHALL, PLAIN RICE, ANDRA PAPPU, BRINJAL PULI KOOTU, RASAM, PICKLE",
+                            "ALOO PAPDI CHATCHANNI, SUNDAL, TEA / COFFEE / MILK",
+                            "ROTI, VEG MAKHANWALA, RAJASTHANI DAL, BASANTI PULAO, RICE, RASAM"],
+
+                        ["VERMICELLI KITCHADI, CHUTNEY, BUTTER, JAM, MILK, TEA, COFFEE",
+                            "SALAD, ROTI, GREEN LEAVES SABJI, RICE, SAMBAR, BEETROOT PORIYAL, RASAM, PICKLE",
+                            "SAMBAR VADA, COFFEE / MILK",
+                            "ROTI, RICE, DAL, PLAIN DAL, RASAM, PANEER LABADAR, RASAM RICE"],
+
+                        ["UTHAPPAM, SAMBAR, GREEN CHUTNEY, EGG, SPROUTS, BANANA / FRUIT SALAD, BUTTER JAM, MILK, TEA, COFFEE",
+                            "ROTI, ALOO PALAK, VEG PULAO, PLAIN RICE, KARA KUZHAMBU, GREENS KOOTU, RASAM, PAYASAM / SWEET BONDI",
+                            "SAMOSA, TAMRIND CHUTNEY, TEA",
+                            "ROTI, BEHAN BARTHA, ACHARI CHICKEN / BUTTER CHICKEN, PUNJABI DAL, RICE, SAMBAR"],
+
+                        ["BHATURA, CHOLE MASALA, BREAD, BUTTER, JAM, MILK, TEA, COFFEE",
+                            "ROTI, TOMATO DAL, PLAIN RICE, GREEN KOOTU, RASAM, PICKLE",
+                            "PAV, COCONUT CHUTNEY, TEA / COFFEE / MILK",
+                            "ROTI, DAL TADKA, CHETTINADU CHICKEN / CHICKEN MASALA, SHAI PANEER, RICE, PICKLE"],
+
+                        ["POHA, PONGAL, JALEBI, BANANA / FRUIT SALAD, BUTTER, MILK, TEA, COFFEE",
+                            "ROTI, BOONDI RAITHA, VEG BIRYANI, ALOO GOBI PARATHA, SAMBAR RICE, RAW BANANA PORIYAL, JAIN",
+                            "MYSOUR BONDA, GREEN CHUTNEY, TEA / COFFEE / MILK",
+                            "ROTI, FRY, DAL FRY, RASAM, GULAB JAMUN, RICE"],
+
+                        ["MASALA DOSA, SAMBAR, CHUTNEY, BANANA / FRUIT SALAD, BREAD, BUTTER, MILK, TEA, COFFEE",
+                            "CUCUMBER RAITHA, CHICKEN BIRYANI, MIX VEG SABJI, PANEER MUTTER MASALA, JAIN DAL",
+                            "DHOKALA, GREEN CHUTNEY, TEA / COFFEE / MILK",
+                            "CHAPATHI, BANGALI ALOO, DAL FRY, DAL-MAKHANI, RASAM"]
+                    ]
+                },
+                safal_boys: {
+                    fullTable: generateWeeklyMenu("Safal Mess", [
+                        ["Idly, Sambar", "Rice, Jeera Kolambu", "Puffs, Tea", "Roti, Rajma Masala"],
+                        ["PongalS, Vada", "LemonS Rice, Dal", "Biscuits, Coffee", "Chappati, Channa Masala"],
+                        ["Upma, Chutney", "STomato Rice, Rasam", "Samosa, Coffee", "Paratha, Dal Fry"],
+                        ["Dosa, Chutney", "Veg Biryani, Curd", "Bread Pakora, Tea", "Naan, Paneer Butter Masala"],
+                        ["Poori, Bhaji", "Ghee Rice, Sambhar", "Bonda, Coffee", "Fried Rice, Gobi Manchurian"],
+                        ["Aloo Paratha, Pickle", "Curd Rice, Curry", "Cake, Tea", "Veg Pulav, Korma"],
+                        ["Idiyappam, Kurma", "Bisi Bele Bath, Papad", "Banana Chips, Tea", "Roti, Mix Veg Curry"]
+                    ]),
+                    dishes: [
+                        ["Idly, Sambar", "Rice, Jeera Kolambu", "Puffs, Tea", "Roti, Rajma Masala"],
+                        ["PongalS, Vada", "LemonS Rice, Dal", "Biscuits, Coffee", "Chappati, Channa Masala"],
+                        ["Upma, Chutney", "Tomato Rice, SRasam", "Samosa, Coffee", "Paratha, Dal Fry"],
+                        ["Dosa, Chutney", "Veg Biryani, Curd", "Bread Pakora, Tea", "Naan, Paneer Butter Masala"],
+                        ["Poori, Bhaji", "Ghee Rice, Sambhar", "Bonda, Coffee", "Fried Rice, Gobi Manchurian"],
+                        ["Aloo Paratha, Pickle", "Curd Rice, Curry", "Cake, Tea", "Veg Pulav, Korma"],
+                        ["Idiyappam, Kurma", "Bisi Bele Bath, Papad", "Banana Chips, Tea", "Roti, Mix Veg Curry"]
+                    ]
+                }
+            };
+
+            function updateDateTime() {
+                const now = new Date();
+                currentTimeElement.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                currentDateElement.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+
+            function displayCurrentMenu(selectedMess) {
+                const menuToday = messMenus[selectedMess]?.dishes[today] || [];
+                const servingNow = timeNow > 730 && timeNow < 915 ? menuToday[0] :
+                    timeNow > 1230 && timeNow < 1430 ? menuToday[1] :
+                        timeNow > 1700 && timeNow < 1815 ? menuToday[2] :
+                            timeNow > 1930 && timeNow < 2100 ? menuToday[3] :
+                                "Mess is currently closed";
+                currentMenu.textContent = servingNow;
+            }
+
+            function generateWeeklyMenu(messName, dailyMenus) {
+                return `<table class='w-full border-collapse text-gray-300'>
+                            <thead>
+                                <tr class='bg-gray-700'>
+                                    <th class='border p-2'>Day</th>
+                                    <th class='border p-2'>Breakfast</th>
+                                    <th class='border p-2'>Lunch</th>
+                                    <th class='border p-2'>Snacks</th>
+                                    <th class='border p-2'>Dinner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${daysOfWeek.map((day, i) => `
+                                    <tr class="${i === today ? 'highlight' : ''}">
+                                        <td class='border p-2'>${day}</td>
+                                        <td class='border p-2'>${dailyMenus[i][0]}</td>
+                                        <td class='border p-2'>${dailyMenus[i][1]}</td>
+                                        <td class='border p-2'>${dailyMenus[i][2]}</td>
+                                        <td class='border p-2'>${dailyMenus[i][3]}</td>
+                                    </tr>`).join('')}
+                            </tbody>
+                        </table>`;
+            }
+
+            fullMenuButton.addEventListener("click", () => {
+                const selectedMess = messSelectElement.value;
+                popupContent.innerHTML = messMenus[selectedMess]?.fullTable || "<p>Menu not available yet</p>";
+                popup.classList.remove("hidden");
+            });
+
+            closePopup.addEventListener("click", () => popup.classList.add("hidden"));
+            messSelectElement.addEventListener("change", () => displayCurrentMenu(messSelectElement.value));
+
+            setInterval(updateDateTime, 1000);
+            updateDateTime();
+            displayCurrentMenu(messSelectElement.value);
+        });
+    </script>
+</body>
+
+</html>
