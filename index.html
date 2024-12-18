@@ -483,7 +483,7 @@
 
                 const menuToday = messMenus[selectedMess]?.dishes[today] || [];
                 const servingNow = timeNow > 730 && timeNow < 915 ? menuToday[0] :
-                    timeNow > 1230 && timeNow < 1530 ? menuToday[1] :
+                    timeNow > 1230 && timeNow < 1415 ? menuToday[1] :
                         timeNow > 1700 && timeNow < 1815 ? menuToday[2] :
                             timeNow > 1959 && timeNow < 2100 ? menuToday[3] :
                                 `<b>NOTHING</b> <br> <i>[Mess is currently closed]</i>`;
