@@ -47,6 +47,9 @@
                 <option value="crcl_boys">CRCL Mess (Boys Block 1)</option>
                 <option value="mayuri_boys">Mayuri Mess (Boys Block 2-5)</option>
                 <option value="safal_boys">Safal Mess (Boys Block 6)</option>
+                <option value="ab_girls">AB Caterers (Girls Block 1)</option>
+                <option value="mayuri_girls">Mayuri Mess (Girls Block 2)</option>
+
             </select>
         </div>
 
@@ -89,7 +92,9 @@
         <footer class="mt-8">
             <p class="text-xs text-gray-500">Made with ❤️ by <a href="https://www.linkedin.com/in/Manav-Tiwari"
                     target="_blank" style="text-decoration: underline; color: inherit;">
-                    <b>Manav Tiwari</b></a> <br><br> Any Issue or Feedback? <a href="https://forms.gle/jaDutpUu6rqj6xgf7"target="_blank" style="text-decoration: underline; color: inherit;">
+                    <b>Manav Tiwari</b></a> <br><br> Any Issue or Feedback? <a
+                    href="https://forms.gle/jaDutpUu6rqj6xgf7" target="_blank"
+                    style="text-decoration: underline; color: inherit;">
                     <b>Inform Me</b></a>
             </p>
         </footer>
@@ -113,7 +118,7 @@
             const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const messMenus = {
                 mayuri_boys: {
-                    fullTable: generateWeeklyMenu("Mayuri Mess", [
+                    fullTable: generateWeeklyMenu("Mayuri Boys Mess", [
                         ["MASALA DOSA, SAMBAR, CHUTNEY, FRUITS, BREAD BUTTER JAM, MILK, TEA, COFFEE",
                             "ROTI, MASALA DAL, CHICKEN DUM BIRYANI (LIMITED SPICE), RASAM, PICKLE, VEG BIRYANI, WHITE RICE, PANEER MASALA, ONION CUCUMBER RAITA",
                             "VARIETY OF PASTA, SAUCE, TEA COFFEE MILK",
@@ -127,7 +132,7 @@
                             "CHUDA or CHANNA SUNDAL, TEA COFFEE MILK",
                             "ROTI, DAL FRY, ALOO 65, WHITE RICE, SWEET CORN or LANG FUNG SOUP, FRUIT CUSTARD or PAYSAM, RASAM and PICKLE"],
                         ["ONION/VEG UTTAPAM, SAMBAR, TOMATO CHUTNEY, FRUITS, BREAD BUTTER JAM, MILK, TEA, COFFEE, BOILED EGG, SPROUTS",
-                            "ROTI, JEERA ALOO, WHITE RICE, PULI KOLAMBU, DAL MAKHANI, GARLIC RASAM & PICKLE, SALAD, BOONDI",
+                            "ROTI, JEERA ALOO, WHITE RICE, AVIAL, PULI KOLAMBU, DAL MAKHANI, GARLIC RASAM & PICKLE, SALAD, BOONDI",
                             "SAMOSA, SAUCE, TEA COFFEE MILK",
                             "ROTI, PLAIN DAL, WHITE RICE, KADAI CHICKEN or CHICKEN MASALA, PANEER MASALA, RASAM & PICKLE"],
                         ["POHA, JALEBI, PONGAL, SAMBAR, CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE",
@@ -159,7 +164,7 @@
                             "CHUDA or CHANNA SUNDAL, TEA COFFEE MILK",
                             "ROTI, DAL FRY, ALOO 65, WHITE RICE, SWEET CORN or LANG FUNG SOUP, FRUIT CUSTARD or PAYSAM, RASAM and PICKLE"],
                         ["ONION/VEG UTTAPAM, SAMBAR, TOMATO CHUTNEY, FRUITS, BREAD BUTTER JAM, MILK, TEA, COFFEE, BOILED EGG, SPROUTS",
-                            "ROTI, JEERA ALOO, WHITE RICE, PULI KOLAMBU, DAL MAKHANI, GARLIC RASAM & PICKLE, SALAD, BOONDI",
+                            "ROTI, JEERA ALOO, WHITE RICE, AVIAL, PULI KOLAMBU, DAL MAKHANI, GARLIC RASAM & PICKLE, SALAD, BOONDI",
                             "SAMOSA, SAUCE, TEA COFFEE MILK",
                             "ROTI, PLAIN DAL, WHITE RICE, KADAI CHICKEN or CHICKEN MASALA, PANEER MASALA, RASAM & PICKLE"],
                         ["POHA, JALEBI, PONGAL, SAMBAR, CHUTNEY, FRUIT, BREAD BUTTER JAM, MILK, TEA, COFFEE",
@@ -323,6 +328,134 @@
                             "BUTTER MILK or JUICE, RAJMA MASALA, LEMON RICE or VEG PULAO, CHAPATHI, POTATO PORIYAL, PEPAR RASAM, PICKLE",
                             "BOILED CHANA or PASTA, SAUCE CHUTNEY, TEA COFFEE MILK",
                             "VEG MANCHURIAN, MIX DAL, NOODLE SOUP, CHAPATHI, FIRED RICE, RASAM, PICKLE"]
+                    ]
+                },
+                ab_girls: {
+                    fullTable: generateWeeklyMenu("AB Girls Mess", [
+                        ["PLAIN DOSA, ALOO MASALA, SAMBAR, CHUTNEY, BANANA / FRUIT SALAD, MILK TEA COFFEE",
+                            "CHAPATHI, MASALA DHAL, CHICKEN DUM BIRYANI, BRINJAL GRAVY, VEGETABLE BIRYANI, PANEER GRAVY, PLAIN RICE, LEMON JUICE, FRYMUS & PICKLE",
+                            "SWEET CORN, SPRING ROLL (MONTHLY ONCE), MILK TEA COFFEE",
+                            "BUTTER ROTI, JEERA RICE, DUM ALOO MASALA, PLAINS RICE, RASAM & PICKLE, GULAB JAMUN, MANCHOW SOUP"],
+                        ["VEG UTHAPPAM, SAMBAR, TOMATO ONION CHUTNEY/MINT CHUTNEY, BANANA, BOILED EGG, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "CHAPATHI, DAL RICE, POTALI KUZHAMBU, CARROT BEANS CURRY / BREAD BATTA, RASAM, CUCUMBER, LEMON, ONION SALAD, BUTTERMILK, PICKLE",
+                            "KACHORI / VADA PAV, RED CHUTNEY, MILK TEA COFFEE",
+                            "PHULKA, SOYA BEAN MASALA, TOMATO RICE, PLAIN RICE, PANEER BHURJI, PICKLE, EGG CURRY, RASAM & PICKLE"],
+                        ["METHI PARATHA / ALOO PARATHA, ALOO MATAR SEMI GRAVY, GREEN CHUTNEY & CURD, SPROUTS, FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "CHAPATHI, CHOLE MASALA, PLAIN RICE, DAL TADKA, KARA KUZHAMBU / AVIAL, MINT RICE / TOMATO RICE, RASAM, SALAD, BUTTERMILK, PICKLE",
+                            "PASTA / NOODLES, WHITE SAUCE / RED SAUCE, MILK TEA COFFEE",
+                            "CORIANDER CHAPATHI, PLAIN RICE, KUSHKA MASALA, RASAM & PICKLE"],
+                        ["IDLY, URAD VADA, SAMBAR, COCONUT CHUTNEY / MINT CHUTNEY, BANANA, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "PHULKA, ALOO METHI, PLAIN RICE, MOONG DHAL, SAMBAR, MIX VEG PORIYAL, RASAM, FRYMUS, TOSSED SALAD, PICKLE",
+                            "BOILED PEANUT/PANI POORI, MILK TEA COFFEE",
+                            "PHULKA, CHICKEN FRY, KADHAI CHICKEN, EGG BHURJI, MASOOR DHAL, PICKLE"],
+                        ["PAV BHAJI, RAVA VEG KHICHDI, BOILED EGG, FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "PHULKA, BHINDI FRY, PLAIN RICE, PALAK DHAL, VEG PULAO/SAMBAR RICE, VEG PORIYAL, RASAM, PAPAD, CURD, PICKLE",
+                            "VEG PUFF WITH SWEET SAUCE, MILK TEA COFFEE",
+                            "JEERA CHAPATHI, VEG MANCHURIAN / CHILLI POTATO, FRIED RICE, MASOOR DHAL, RASAM & PICKLE"],
+                        ["POHA, JALEBI, SEV, PONGAL, SAMBAR, SPROUTS, BANANA, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "PHULKA, RAJMA MASALA, PLAIN RICE, KOOTU/MOR KUZHAMBU, ALOO FRY, RASAM, CURD RICE/LEMON RICE, SEMIYA/BOONDI/RICE KHEER, PAPAD, PICKLE",
+                            "PAPDI CHAT / BHEL POORI, MILK TEA COFFEE",
+                            "TRIANGLE PARATHA, CHICKEN FRY, KADHAI CHICKEN, HOT & SOUR SOUP, PICKLE"],
+                        ["BHATURA / POORI ALOO, CHOLE MASALA, FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "CHAPATHI, KADHAI VEG, PLAIN RICE, TOMATO DHAL, SAMBAR, KUSHKA RICE, RASAM, PICKLE",
+                            "MASALA BUN / ALOO MASALA SANDWICH, MILK TEA COFFEE",
+                            "METHI CHAPATHI, KADI PAKODA, ALOO JEERA, TOMATO SOUP, RASAM & PICKLE"]
+                    ]
+                    ),
+                    dishes: [
+                        ["PLAIN DOSA, ALOO MASALA, SAMBAR, CHUTNEY, BANANA / FRUIT SALAD, MILK TEA COFFEE",
+                            "CHAPATHI, MASALA DHAL, CHICKEN DUM BIRYANI, BRINJAL GRAVY, VEGETABLE BIRYANI, PANEER GRAVY, PLAIN RICE, LEMON JUICE, FRYMUS & PICKLE",
+                            "SWEET CORN, SPRING ROLL (MONTHLY ONCE), MILK TEA COFFEE",
+                            "BUTTER ROTI, JEERA RICE, DUM ALOO MASALA, PLAINS RICE, RASAM & PICKLE, GULAB JAMUN, MANCHOW SOUP"],
+                        ["VEG UTHAPPAM, SAMBAR, TOMATO ONION CHUTNEY/MINT CHUTNEY, BANANA, BOILED EGG, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "CHAPATHI, DAL RICE, POTALI KUZHAMBU, CARROT BEANS CURRY / BREAD BATTA, RASAM, CUCUMBER, LEMON, ONION SALAD, BUTTERMILK, PICKLE",
+                            "KACHORI / VADA PAV, RED CHUTNEY, MILK TEA COFFEE",
+                            "PHULKA, SOYA BEAN MASALA, TOMATO RICE, PLAIN RICE, PANEER BHURJI, PICKLE, EGG CURRY, RASAM & PICKLE"],
+                        ["METHI PARATHA / ALOO PARATHA, ALOO MATAR SEMI GRAVY, GREEN CHUTNEY & CURD, SPROUTS, FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "CHAPATHI, CHOLE MASALA, PLAIN RICE, DAL TADKA, KARA KUZHAMBU / AVIAL, MINT RICE / TOMATO RICE, RASAM, SALAD, BUTTERMILK, PICKLE",
+                            "PASTA / NOODLES, WHITE SAUCE / RED SAUCE, MILK TEA COFFEE",
+                            "CORIANDER CHAPATHI, PLAIN RICE, KUSHKA MASALA, RASAM & PICKLE"],
+                        ["IDLY, URAD VADA, SAMBAR, COCONUT CHUTNEY / MINT CHUTNEY, BANANA, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "PHULKA, ALOO METHI, PLAIN RICE, MOONG DHAL, SAMBAR, MIX VEG PORIYAL, RASAM, FRYMUS, TOSSED SALAD, PICKLE",
+                            "BOILED PEANUT/PANI POORI, MILK TEA COFFEE",
+                            "PHULKA, CHICKEN FRY, KADHAI CHICKEN, EGG BHURJI, MASOOR DHAL, PICKLE"],
+                        ["PAV BHAJI, RAVA VEG KHICHDI, BOILED EGG, FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "PHULKA, BHINDI FRY, PLAIN RICE, PALAK DHAL, VEG PULAO/SAMBAR RICE, VEG PORIYAL, RASAM, PAPAD, CURD, PICKLE",
+                            "VEG PUFF WITH SWEET SAUCE, MILK TEA COFFEE",
+                            "JEERA CHAPATHI, VEG MANCHURIAN / CHILLI POTATO, FRIED RICE, MASOOR DHAL, RASAM & PICKLE"],
+                        ["POHA, JALEBI, SEV, PONGAL, SAMBAR, SPROUTS, BANANA, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "PHULKA, RAJMA MASALA, PLAIN RICE, KOOTU/MOR KUZHAMBU, ALOO FRY, RASAM, CURD RICE/LEMON RICE, SEMIYA/BOONDI/RICE KHEER, PAPAD, PICKLE",
+                            "PAPDI CHAT / BHEL POORI, MILK TEA COFFEE",
+                            "TRIANGLE PARATHA, CHICKEN FRY, KADHAI CHICKEN, HOT & SOUR SOUP, PICKLE"],
+                        ["BHATURA / POORI ALOO, CHOLE MASALA, FRUIT SALAD, BREAD BUTTER JAM, MILK TEA COFFEE",
+                            "CHAPATHI, KADHAI VEG, PLAIN RICE, TOMATO DHAL, SAMBAR, KUSHKA RICE, RASAM, PICKLE",
+                            "MASALA BUN / ALOO MASALA SANDWICH, MILK TEA COFFEE",
+                            "METHI CHAPATHI, KADI PAKODA, ALOO JEERA, TOMATO SOUP, RASAM & PICKLE"]
+
+                    ]
+                },
+                mayuri_girls: {
+                    fullTable: generateWeeklyMenu("Mayuri Girls Mess", [
+                        ["Masala, Plain Dosa, Sambhar, Chutney, Banana, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Roti, Masala Dal, Chicken Dum Biryani (Limited Spice), Veg Biryani, Panner Masala, White Rice, Rasam, Pickle, Onion Cucumber Raitha",
+                            "Noodle/Cutlet, Sauce, Tea/Coffee/Milk",
+                            "Butter Roti, Dal Makhani, Matar Pulao, Mix Veg Dry, White Rice, Rasam & Pickle, Gulab Jamun, Sweetcorn Soup"],
+                        ["Onion/Veg Uttapam, Sambhar, Tomato Chutney, Banana, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Butter Roti, Rajma Masala, Veg Pulao, Aloo-65, White Rice, Kootu/More Kulambu, Tomato Rasam, Cut Lemon, Betroot Cucumber Carrot Salad, Curd",
+                            "Appe Chutney, Karam Chutney, Tea/Coffee/Milk",
+                            "Methi Chappathi, Aloo Paneer Kofta, White Rice, Egg Masala, Chowli Masala, White Rice, Rasam, Pickle"],
+                        ["Methi Paratha/Aloo Paratha, Aloo Matar Semi/Curd, Fruit Salad, Bread, Butter Jam, Milk, Tea, Coffee, Boiled Egg",
+                            "Roti, Channa Masala, Dal Tadka, Sambhar, Potato Podimas, Pepper Rasam, Boondi Raita, Salad",
+                            "Pani Poori, Tea/Coffee/Milk",
+                            "Jeera Chappathi, Masoor Dal, Fried Rice, Veg Manchurian Dry/Dum Aloo, Tomato Soup"],
+                        ["Idly, Midhu Vada, Sambhar, Variety of Chutney, Bread, Butter Jam, Milk, Tea, Coffee, Sprouts",
+                            "Roti, Aloo Soya Semi Gravy, Moong Dal, Lemon Rice/Curd Rice, Pappu Thoriyal, Beetroot Carrot Cucumber Lemon Salad, Semiya Kheer/Shabudana Kheer, Papad",
+                            "Samosa/Kachori, Green Chutney, Red Chutney, Tea/Coffee/Milk",
+                            "Butter Roti, Dal Tadka, White Rice, Chicken Masala Semi Gravy, Chilly Paneer, Rasam & Pickle"],
+                        ["Pav Bhaji, Vermasilliy Khichdi, Banana, Chutney, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Roti, Mix Veg Dry, Jeera Rice, Dal Tadka, White Rice, Pulio Kulambu, Variety Porial, Drumstick Rasam, Pickle & Appalam",
+                            "Variety of Pasta, Tea/Coffee/Milk",
+                            "Roti, Aloo Palak, White Rice, Panmechal Dal, Egg Masala, Hot & Sour Soup, Rasam & Pickle"],
+                        ["Poha, Jalebi, Pongal, Sambhar, Chutney, Fruit Salad, Bread, Butter Jam, Milk, Tea, Coffee, Sprouts",
+                            "Butter Roti, Bhindi Masala Dry, Jeera Rice/Coconut Rice, Channa Dal, Plain Rice, Sambhar Rice, Rasam, Frymus, Sweet Boondi/Halwa",
+                            "Sweet Corn/Spring Roll (Spring Roll Once in a Month), Tea/Coffee/Milk",
+                            "Roti, Plain Dal, White Rice, Kadai Chicken, Rasam & Pickle, Fruit Custard"],
+                        ["Masala, Plain Dosa, Sambhar, Chutney, Banana, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Roti, Masala Dal, Chicken Dum Biryani (Limited Spice), Veg Biryani, Panner Masala, White Rice, Rasam, Pickle, Onion Cucumber Raitha",
+                            "Noodle/Cutlet, Sauce, Tea/Coffee/Milk",
+                            "Butter Roti, Dal Makhani, Matar Pulao, Mix Veg Dry, White Rice, Rasam & Pickle, Gulab Jamun, Sweetcorn Soup"]
+                    ]
+                    ),
+                    dishes: [
+                        ["Masala, Plain Dosa, Sambhar, Chutney, Banana, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Roti, Masala Dal, Chicken Dum Biryani (Limited Spice), Veg Biryani, Panner Masala, White Rice, Rasam, Pickle, Onion Cucumber Raitha",
+                            "Noodle/Cutlet, Sauce, Tea/Coffee/Milk",
+                            "Butter Roti, Dal Makhani, Matar Pulao, Mix Veg Dry, White Rice, Rasam & Pickle, Gulab Jamun, Sweetcorn Soup"],
+                        ["Onion/Veg Uttapam, Sambhar, Tomato Chutney, Banana, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Butter Roti, Rajma Masala, Veg Pulao, Aloo-65, White Rice, Kootu/More Kulambu, Tomato Rasam, Cut Lemon, Betroot Cucumber Carrot Salad, Curd",
+                            "Appe Chutney, Karam Chutney, Tea/Coffee/Milk",
+                            "Methi Chappathi, Aloo Paneer Kofta, White Rice, Egg Masala, Chowli Masala, White Rice, Rasam, Pickle"],
+                        ["Methi Paratha/Aloo Paratha, Aloo Matar Semi/Curd, Fruit Salad, Bread, Butter Jam, Milk, Tea, Coffee, Boiled Egg",
+                            "Roti, Channa Masala, Dal Tadka, Sambhar, Potato Podimas, Pepper Rasam, Boondi Raita, Salad",
+                            "Pani Poori, Tea/Coffee/Milk",
+                            "Jeera Chappathi, Masoor Dal, Fried Rice, Veg Manchurian Dry/Dum Aloo, Tomato Soup"],
+                        ["Idly, Midhu Vada, Sambhar, Variety of Chutney, Bread, Butter Jam, Milk, Tea, Coffee, Sprouts",
+                            "Roti, Aloo Soya Semi Gravy, Moong Dal, Lemon Rice/Curd Rice, Pappu Thoriyal, Beetroot Carrot Cucumber Lemon Salad, Semiya Kheer/Shabudana Kheer, Papad",
+                            "Samosa/Kachori, Green Chutney, Red Chutney, Tea/Coffee/Milk",
+                            "Butter Roti, Dal Tadka, White Rice, Chicken Masala Semi Gravy, Chilly Paneer, Rasam & Pickle"],
+                        ["Pav Bhaji, Vermasilliy Khichdi, Banana, Chutney, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Roti, Mix Veg Dry, Jeera Rice, Dal Tadka, White Rice, Pulio Kulambu, Variety Porial, Drumstick Rasam, Pickle & Appalam",
+                            "Variety of Pasta, Tea/Coffee/Milk",
+                            "Roti, Aloo Palak, White Rice, Panmechal Dal, Egg Masala, Hot & Sour Soup, Rasam & Pickle"],
+                        ["Poha, Jalebi, Pongal, Sambhar, Chutney, Fruit Salad, Bread, Butter Jam, Milk, Tea, Coffee, Sprouts",
+                            "Butter Roti, Bhindi Masala Dry, Jeera Rice/Coconut Rice, Channa Dal, Plain Rice, Sambhar Rice, Rasam, Frymus, Sweet Boondi/Halwa",
+                            "Sweet Corn/Spring Roll (Spring Roll Once in a Month), Tea/Coffee/Milk",
+                            "Roti, Plain Dal, White Rice, Kadai Chicken, Rasam & Pickle, Fruit Custard"],
+                        ["Masala, Plain Dosa, Sambhar, Chutney, Banana, Bread, Butter Jam, Milk, Tea, Coffee",
+                            "Roti, Masala Dal, Chicken Dum Biryani (Limited Spice), Veg Biryani, Panner Masala, White Rice, Rasam, Pickle, Onion Cucumber Raitha",
+                            "Noodle/Cutlet, Sauce, Tea/Coffee/Milk",
+                            "Butter Roti, Dal Makhani, Matar Pulao, Mix Veg Dry, White Rice, Rasam & Pickle, Gulab Jamun, Sweetcorn Soup"]
+
                     ]
                 }
             };
