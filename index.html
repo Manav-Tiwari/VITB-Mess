@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIT Bhopal Mess Menu</title>
+    <title>VIT Hostel Mess Schedule</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -39,8 +39,8 @@
         }
 
         #full-menu-content {
-            margin: 0 auto;
             font-size: 6px;
+            margin: 0 auto;
         }
 
         #current-menu {
@@ -48,10 +48,20 @@
             max-width: 700px;
             margin: 0 auto;
         }
-        footer{
+
+        footer {
             padding-top: 5px;
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YT1ZNFNR18"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YT1ZNFNR18');
+    </script>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen">
@@ -109,11 +119,10 @@
         </div>
 
         <footer class="mt-8">
-            <p class="text-xs text-gray-500">Made with ❤️ by <a href="https://www.linkedin.com/in/Manav-Tiwari" target="_blank"
-                    style="text-decoration: underline; color: inherit;">
-                    <b>Manav Tiwari</b></a> <br> Any Issue or Feedback? <a
-                    href="https://forms.gle/jaDutpUu6rqj6xgf7" target="_blank"
-                    style="text-decoration: underline; color: inherit;">
+            <p class="text-xs text-gray-500">Made with ❤️ by <a href="https://www.linkedin.com/in/Manav-Tiwari"
+                    target="_blank" style="text-decoration: underline; color: inherit;">
+                    <b>Manav Tiwari</b></a> <br> Any Issue or Feedback? <a href="https://forms.gle/jaDutpUu6rqj6xgf7"
+                    target="_blank" style="text-decoration: underline; color: inherit;">
                     <b>Inform Me</b></a>󠁝
             </p>
         </footer>
@@ -506,7 +515,7 @@
                 return messSelect.value;
             }
 
-            // Automatically update the menu every 30 seconds
+            // Automatically update the menu every 15 seconds
             setInterval(() => {
                 const selectedMess = getSelectedMess(); // Get the selected mess dynamically
                 displayCurrentMenu(selectedMess);
